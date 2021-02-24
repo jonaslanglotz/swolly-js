@@ -285,13 +285,9 @@ async function createStore(connectionURI, options) {
         through: TaskSupporters
     })
 
-    try {
-        await sequelize.authenticate()
-        await sequelize.sync({alter:true})
-        resolve(sequelize)
-    } catch (err) {
-        reject(err)
-    }
+    await sequelize.authenticate()
+    await sequelize.sync({alter:true})
+    return sequelize
 }
 
 module.exports = createStore
