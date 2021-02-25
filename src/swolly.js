@@ -1,5 +1,12 @@
 const Utils = require("./utils");
 
+const CategoryMixin = require("./mixins/category")
+const ImageMixin = require("./mixins/image")
+const ProjectMixin = require("./mixins/project")
+const SessionMixin = require("./mixins/session")
+const TaskMixin = require("./mixins/task")
+const UserMixin = require("./mixins/user")
+
 /**
  * This is the main class, the entry point to swolly.
  */
@@ -20,7 +27,13 @@ class Swolly {
      */
     async authenticate() {
         this.store = await Utils.createStore(this.sequelizeOptions.connectionURI, this.sequelizeOptions.options)
-        this.models = this.store.models
+
+        this.Category = new CategoryMixin(this)
+        this.Image = new ImageMixin(this.store)
+        this.Project = new ProjectMixin(this.store)
+        this.Session = new SessionMixin(this.store)
+        this.Task = new TaskMixin(this.store)
+        this.User = new UserMixin(this.store)
     }
 }
 

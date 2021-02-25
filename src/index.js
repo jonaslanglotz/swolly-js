@@ -1,3 +1,6 @@
 module.exports = {
-    Swolly: require("./swolly")
+    Swolly: require("./swolly"),
+
+    SwollyBaseError: require("./errors/baseError"),
+    SwollyAuthorizationError: require("./errors/authorizationError"),
 }
