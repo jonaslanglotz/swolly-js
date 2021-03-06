@@ -218,6 +218,9 @@ class Model {
         object = await Promise.resolve(object)
 
         if (Array.isArray(object)) {
+            if (object.length === 0) {
+                return []
+            }
             return (await Promise.all(object.map(async item => Model.getDataFromObject(item, filtered, depth+1)))).filter(item => item != null)
         }
 
