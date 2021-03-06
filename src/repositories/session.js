@@ -40,7 +40,7 @@ class SessionRepository extends Repository {
             ...(filter != null && {where: {
                 ...(filter.userId != null && {UserId: filter.userId})
             }}),
-            ...(sort != null && {order: [sort.field, sort.direction]})
+            ...(sort != null && {order: [[sort.field, sort.direction]]})
         })
         return result == null ? [] : await Session.createFromArray(result, this.swolly, token, caller)
     })}

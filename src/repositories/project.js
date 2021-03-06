@@ -109,7 +109,7 @@ class ProjectRepository extends Repository {
                     ...(filter.creatorId != null && {CreatorId: filter.creatorId}),
                     ...(filter.status != null && {status: filter.status})
                 }}),
-                ...(sort != null && {order: [sort.field, sort.direction]}),
+                ...(sort != null && {order: [[sort.field, sort.direction]]}),
                 ...(filter != null && filter.imageId != null && { include: {
                     model: this.store.Image,
                     as: "images",

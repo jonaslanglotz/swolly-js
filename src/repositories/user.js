@@ -49,11 +49,11 @@ class UserRepository extends Repository {
 
         const { filter, sort } = options
 
-        const result = await this.store.User.findAll({
+        const result = await this.store.User.findAll({,
             ...(filter != null && {where: {
                 ...(filter.role != null && {role: filter.role})
             }}),
-            ...(sort != null && {order: [sort.field, sort.direction]}),
+            ...(sort != null && {order: [[sort.field, sort.direction]]}),
             ...(filter != null && filter.supportingTaskId != null && { include: {
                 model: this.store.Task,
                 as: "supportedTasks",

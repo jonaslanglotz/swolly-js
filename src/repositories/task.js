@@ -38,7 +38,7 @@ class TaskRepository extends Repository {
             ...(filter != null && {where: {
                 ...(filter.projectId != null && {ProjectId: filter.projectId}),
             }}),
-            ...(sort != null && {order: [sort.field, sort.direction]}),
+            ...(sort != null && {order: [[sort.field, sort.direction]]}),
             ...(filter != null && filter.supporterId != null && { include: {
                 model: this.store.User,
                 as: "supporters",

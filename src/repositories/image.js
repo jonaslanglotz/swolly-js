@@ -40,15 +40,16 @@ class ImageRepository extends Repository{
         }
 
         const result = await this.store.Image.findAll({
-                ...(filter != null && filter.projectId != null && { include: {
-                    model: this.store.Project,
-                    as: "projects",
-                    through: {
-                        where: {
-                            ProjectId: filter.projectId
-                        }
+            ...(sort != null && {order: [[sort.field, sort.direction]]}),
+            ...(filter != null && filter.projectId != null && { include: {
+                model: this.store.Project,
+                as: "projects",
+                through: {
+                    where: {
+                        ProjectId: filter.projectId
                     }
-                }}),
+                }
+            }}),
         })
 
         return result == null ? [] : await Image.createFromArray(result, this.swolly, token, caller)

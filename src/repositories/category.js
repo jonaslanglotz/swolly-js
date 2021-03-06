@@ -29,7 +29,7 @@ class CategoryRepository extends Repository {
         const { sort } = options
 
         const result = await this.store.Category.findAll({
-            ...(sort != null && {order: [sort.field, sort.direction]})
+            ...(sort != null && {order: [[sort.field, sort.direction]]})
         })
 
         return result == null ? [] : await Category.createFromArray(result, this.swolly, token, caller)
