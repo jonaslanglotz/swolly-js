@@ -1,7 +1,9 @@
+const SwollyBaseError = require("./baseError")
+
 /**
- * All swolly errors inherit from this BaseError, which itself inherits from the basic JS error.
+ * Thrown when sequelize throws an unexpected error
  */
-class SwollyBaseError extends Error {
+class SwollySequelizeError extends SwollyBaseError {
     /**
      * Initialize the error with a message.
      * 
@@ -11,8 +13,9 @@ class SwollyBaseError extends Error {
         super(message);
 
         /** @type {string} */
-        this.name = 'SwollyBaseError';
+        this.name = 'SwollySequelizeError';
     }
 }
 
-module.exports = SwollyBaseError
+module.exports = SwollySequelizeError
+

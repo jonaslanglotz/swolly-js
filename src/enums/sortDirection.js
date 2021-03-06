@@ -1,4 +1,4 @@
-/*
+/**
  * Enum describing directions in which items may be sorted.
  */
 const SortDirection = {

@@ -1,9 +1,9 @@
 const SwollyBaseError = require("./baseError")
 
 /**
- * Thrown when trying to perform an action one is not authorized for (details in message)
+ * Thrown when a connection can not be established or dies (details in message)
  */
-class SwollyAuthorizationError extends SwollyBaseError {
+class SwollyConnectionError extends SwollyBaseError {
     /**
      * Initialize the error with a message.
      * 
@@ -13,8 +13,8 @@ class SwollyAuthorizationError extends SwollyBaseError {
         super(message);
 
         /** @type {string} */
-        this.name = 'SwollyAuthorizationError';
+        this.name = 'SwollyConnectionError';
     }
 }
 
-module.exports = SwollyAuthorizationError
+module.exports = SwollyConnectionError

@@ -1,7 +1,9 @@
+const SwollyBaseError = require("./baseError")
+
 /**
- * All swolly errors inherit from this BaseError, which itself inherits from the basic JS error.
+ * Thrown when an upload fails
  */
-class SwollyBaseError extends Error {
+class SwollyUploadError extends SwollyBaseError {
     /**
      * Initialize the error with a message.
      * 
@@ -11,8 +13,9 @@ class SwollyBaseError extends Error {
         super(message);
 
         /** @type {string} */
-        this.name = 'SwollyBaseError';
+        this.name = 'SwollyUploadError';
     }
 }
 
-module.exports = SwollyBaseError
+module.exports = SwollyUploadError
+

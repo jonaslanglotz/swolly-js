@@ -4,12 +4,13 @@ const { Sequelize, DataTypes } = require("sequelize");
  *
  * @param {string}  [connectionURI] The connection URI to be passed through to sequelize.
  * @param {object}  [options] The options to be passed through to sequelize.
+ * @param {boolean}  [alter] If sequelize should alter the database.
  *
  */
-async function createStore(connectionURI, options) {
+async function createStore(connectionURI, options, alter) {
     const sequelize = new Sequelize(connectionURI, options);
 
-    const User = require("../models/user").init({
+    const User = sequelize.define("User", {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV4,
@@ -37,13 +38,9 @@ async function createStore(connectionURI, options) {
             type: DataTypes.STRING,
             allowNull: false
         },
-    }, {
-        sequelize,
-        modelName: "User"
     })
 
-
-    const Session = require("../models/session").init({
+    const Session = sequelize.define("Session", {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV4,
@@ -54,12 +51,9 @@ async function createStore(connectionURI, options) {
             type: DataTypes.STRING,
             allowNull: false
         },
-    }, {
-        sequelize,
-        modelName: "Session"
     })
 
-    const Project = require("../models/project").init({
+    const Project = sequelize.define("Project", {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV4,
@@ -99,13 +93,10 @@ async function createStore(connectionURI, options) {
             allowNull: false,
             defaultValue: 0
         }
-    }, {
-        sequelize,
-        modelName: "Project", 
     })
 
 
-    const Category = require("../models/category").init({
+    const Category = sequelize.define("Category", {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV4,
@@ -116,24 +107,18 @@ async function createStore(connectionURI, options) {
             type: DataTypes.STRING,
             allowNull: false
         },
-    }, {
-        sequelize,
-        modelName: "Category"
     })
 
-    const Image = require("../models/image").init({
+    const Image = sequelize.define("Image", {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV4,
             allowNull: false,
             primaryKey: true
         }
-    }, {
-        sequelize,
-        modelName: "Image"
     })
 
-    const Task = require("../models/task").init({
+    const Task = sequelize.define("Task", {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV4,
@@ -141,10 +126,6 @@ async function createStore(connectionURI, options) {
             primaryKey: true
         },
         title: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        status: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -157,9 +138,6 @@ async function createStore(connectionURI, options) {
             allowNull: false,
             defaultValue: 1
         }
-    }, {
-        sequelize,
-        modelName: "Task"
     })
 
     User.Sessions = User.hasMany(Session, {
@@ -265,6 +243,11 @@ async function createStore(connectionURI, options) {
             allowNull: false,
             defaultValue: ""
         }
+        accepted: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        }
 
     })
 
@@ -286,7 +269,7 @@ async function createStore(connectionURI, options) {
     })
 
     await sequelize.authenticate()
-    await sequelize.sync({alter:true})
+    await sequelize.sync({alter})
     return sequelize
 }
 

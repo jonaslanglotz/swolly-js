@@ -1,6 +1,8 @@
+const Errors = require("./errors")
+
 module.exports = {
     Swolly: require("./swolly"),
+    Errors,
 
-    SwollyBaseError: require("./errors/baseError"),
-    SwollyAuthorizationError: require("./errors/authorizationError"),
+    ...Errors
 }
