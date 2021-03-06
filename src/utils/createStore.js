@@ -242,7 +242,7 @@ async function createStore(connectionURI, options, alter) {
             type: DataTypes.TEXT,
             allowNull: false,
             defaultValue: ""
-        }
+        },
         accepted: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
