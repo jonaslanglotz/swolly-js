@@ -103,12 +103,12 @@ class Category extends Model {
     }
 
     /***
-     * Returns the value of 'name'
+     * Returns the value of 'ImageId'
      *
      * @param {boolean} [filtered] - if the return values properties should be filtered to make sure the user is allowed to see them. Defaults to true if the instance is an authenticated instance, false if otherwise.
      * @return {string}
      * */
-    getName(filtered = this.isAuthenticated) {
+    getImageId(filtered = this.isAuthenticated) {
         return this._ImageId
     }
 
