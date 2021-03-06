@@ -201,7 +201,7 @@ class Model {
     
 
     /**
-     * Calls "getData" recursively on all model instances contained in this object. Also handles arrays and unresolved promises.
+     * Calls "getData" recursively on all model instances contained in this object. Also handles arrays and unresolved promises. Arrays will also be filtered for null values
      *
      * @param {object} object - The object to operate on
      * @param {int} depth - The current depth
@@ -218,7 +218,7 @@ class Model {
         object = await Promise.resolve(object)
 
         if (Array.isArray(object)) {
-            return await Promise.all(object.map(async item => Model.getDataFromObject(item, filtered, depth+1)))
+            return (await Promise.all(object.map(async item => Model.getDataFromObject(item, filtered, depth+1)))).filter(item => item != null)
         }
 
         if (object instanceof Model) {
