@@ -68,7 +68,7 @@ class UserRepository extends Repository {
 
     /**
      *
-     * Get an user object by its id
+     * Get a user object by its id
      *
      * Authorized Cases:
      * - Any registered user
@@ -88,6 +88,7 @@ class UserRepository extends Repository {
 
         return result == null ? null : await User.create(result, this.swolly, token, caller)
     })}
+
 
     /**
      * Get an unauthenticated user object by its mail address
