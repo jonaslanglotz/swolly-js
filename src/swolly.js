@@ -1,5 +1,6 @@
 const Utils = require("./utils")
 
+const ApplicationRepository = require("./repositories/application")
 const CategoryRepository = require("./repositories/category")
 const ImageRepository = require("./repositories/image")
 const ProjectRepository = require("./repositories/project")
