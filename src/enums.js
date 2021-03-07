@@ -11,6 +11,7 @@ module.exports = {
     SortDirection: require("./enums/sortDirection"),
     SortField: require("./enums/sortField"),
     TaskSortField: require("./enums/taskSortField"),
+    TaskValidationErrorCode: require("./enums/taskValidationErrorCode"),
     UserGender: require("./enums/userGender"),
     UserRole: require("./enums/userRole"),
     UserSortField: require("./enums/userSortField"),
