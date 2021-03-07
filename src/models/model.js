@@ -225,12 +225,12 @@ class Model {
         }
 
         if (object instanceof Model) {
-            return object.getData(filtered)
+            return await object.getData(filtered)
         }
 
         for (var prop in object) {
             if (object[prop] instanceof Model) {
-                object[prop] = object[prop].getData()
+                object[prop] = await object[prop].getData()
             } else if (Array.isArray(object[prop])) {
                 object[prop] = await Promise.all(object[prop].map(async item => Model.getDataFromObject(item, filterd, depth+1)))
             } else if (typeof object[prop] == "object") {
