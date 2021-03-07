@@ -1,8 +1,8 @@
 const Model = require("./model");
 const User = require("./user");
 const Task = require("./task");
-
-const ApplicationValidationErrorCode = require("../enums/applicationValidationErrorCode");
+const { ValidationError } = require("../errors");
+const { ApplicationValidationErrorCode } = require("../enums");
 
 /**
  * Class representing a single application and its properties
