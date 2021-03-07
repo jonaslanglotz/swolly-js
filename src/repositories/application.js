@@ -106,7 +106,7 @@ class ApplicationRepository extends Repository {
             TaskId: values.taskId,
             UserId: caller.getId()
         }}) != null) {
-            throw new Errors.ValidationError("Task not found.")
+            throw new Errors.NotFoundError("Task not found.")
         }
 
         const task = await this.store.Task.findByPk(values.taskId)
