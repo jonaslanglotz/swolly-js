@@ -220,7 +220,7 @@ class ApplicationRepository extends Repository {
 
         if(
             !caller.isAdmin
-            || application.task.project.CreatorId !== caller.getId()
+            && application.task.project.CreatorId !== caller.getId()
         ) { 
             throw new Errors.AuthorizationError()
         }
