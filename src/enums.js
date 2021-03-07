@@ -1,8 +1,12 @@
 module.exports = {
+    ApplicationSortField: require("./enums/userSortField"),
+    ApplicationValidationErrorCode: require("./enums/projectValidationErrorCode"),
     CategorySortField: require("./enums/categorySortField"),
+    CategoryValidationErrorCode: require("./enums/categoryValidationErrorCode"),
     ImageSortField: require("./enums/imageSortField"),
     ProjectSortField: require("./enums/projectSortField"),
     ProjectStatus: require("./enums/projectStatus"),
+    ProjectValidationErrorCode: require("./enums/projectValidationErrorCode"),
     SessionSortField: require("./enums/sessionSortField"),
     SortDirection: require("./enums/sortDirection"),
     SortField: require("./enums/sortField"),
@@ -11,6 +15,4 @@ module.exports = {
     UserRole: require("./enums/userRole"),
     UserSortField: require("./enums/userSortField"),
     UserValidationErrorCode: require("./enums/userValidationErrorCode"),
-    CategoryValidationErrorCode: require("./enums/categoryValidationErrorCode"),
-    ProjectValidationErrorCode: require("./enums/projectValidationErrorCode"),
 }
