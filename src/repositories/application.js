@@ -43,10 +43,10 @@ class ApplicationRepository extends Repository {
             && (filter && filter.userId != caller.getId())
         ) {
             if (filter && filter.taskId != null) {
-                const task = this.store.Task.findByPk(filter.taskId, include: {
+                const task = this.store.Task.findByPk(filter.taskId, {include: {
                     model: this.store.Project,
                     as: "project"
-                })
+                }})
                 if (task == null || task.project.CreatorId != caller.getId()) {
                     throw new Errors.AuthorizationError()
                 }
