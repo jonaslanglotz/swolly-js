@@ -71,7 +71,7 @@ class Task extends Model {
      *
      * */
     static validate(task) {
-        if (task instanceof task) {
+        if (task instanceof Task) {
             task = task.getData()
         }
 
