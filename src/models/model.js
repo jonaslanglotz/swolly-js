@@ -57,7 +57,7 @@ class Model {
      * */
     async reload() {
         await this._instance.reload()
-        _loadInstance()
+        this._loadInstance()
     }
 
     /**
