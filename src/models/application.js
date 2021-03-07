@@ -96,7 +96,7 @@ class Application extends Model {
             ...super.getData(filtered),
             text: await this.getText(filtered),
             accepted: this.getAccepted(filtered),
-            UserId: await this.getUserId(filtered)
+            UserId: await this.getUserId(filtered),
             TaskId: this.getTaskId(filtered)
         }
     }
