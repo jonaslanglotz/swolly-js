@@ -207,6 +207,6 @@ class Application extends Model {
     }
 }
 
-module.exports = Category
+module.exports = Application
 
 
