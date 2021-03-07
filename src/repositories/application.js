@@ -100,6 +100,8 @@ class ApplicationRepository extends Repository {
     async create(token, values) { return Repository._rethrow(async () => {
         const caller = await this._getAuth(token)
 
+        values.accepted = true
+
         Application.validate(values)
 
         if (await this.store.Application.findOne({ where: {
@@ -121,7 +123,8 @@ class ApplicationRepository extends Repository {
 
         const application = await task.createApplication({
             text: values.text,
-            UserId: caller.getId()
+            UserId: caller.getId(),
+            accepted: values.accepted
         })
 
         return await Application.create(application, this.swolly, token)

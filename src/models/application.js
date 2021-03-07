@@ -60,7 +60,7 @@ class Application extends Model {
 
         if (typeof application.accepted != "boolean") {
             throw new ValidationError(
-                "accepted must be a string",
+                "accepted must be a boolean",
                 ApplicationValidationErrorCode.ACCEPTED_NOT_BOOLEAN
             )
         }
