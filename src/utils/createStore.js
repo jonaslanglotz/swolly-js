@@ -266,7 +266,7 @@ async function createStore(connectionURI, options, alter) {
         },
         through: Application,
         as: "supportedTasks"
-    }
+    })
 
     Task.Applications = Task.hasMany(Application, {
         foreignKey: {
