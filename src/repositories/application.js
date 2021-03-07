@@ -108,17 +108,16 @@ class ApplicationRepository extends Repository {
             TaskId: values.taskId,
             UserId: caller.getId()
         }}) != null) {
-            throw new Errors.NotFoundError("Task not found.")
+            throw new Errors.ValidationError(
+                "User has already applied to this task.",
+                ApplicationValidationErrorCode.ALREADY_APPLIED
+            )
         }
 
         const task = await this.store.Task.findByPk(values.taskId)
 
-
         if (task == null) {
-            throw new Errors.NotFoundError(
-                "User has already applied to this task.",
-                ApplicationValidationErrorCode.ALREADY_APPLIED
-            )
+            throw new Errors.NotFoundError("Task not found.")
         }
 
         const application = await task.createApplication({
