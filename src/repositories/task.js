@@ -44,7 +44,7 @@ class TaskRepository extends Repository {
                 as: "supporters",
                 through: {
                     where: {
-                        SupporterId: filter.supporterId
+                        UserId: filter.supporterId
                     }
                 }
             }}),
@@ -217,82 +217,6 @@ class TaskRepository extends Repository {
         }
 
         await task.destroy()
-    })}
-
-    /**
-     *
-     * Accept an application for a task
-     *
-     * Authorized Cases:
-     * - A project owner accepting an application
-     * - An admin accepting an application
-     *
-     * @param {string} token - An authentication token for verifying authorization
-     * @param {string} applicationId - The application to accept
-     *
-     * @throws {SwollyAuthorizationError} Thrown when the caller, identified by the token, could either not be authenticated or is not authorized.
-     * @throws {SwollyNotFoundError} Thrown when the application could not be found
-     * @throws {SwollySequelizeError}
-     */
-    async accept(token, applicationId) { return Repository._rethrow(async () => {
-        const caller = await this._getAuth(token)
-
-        const application = await this.store.TaskSupporters.findByPk(applicationId, {
-            include: {
-                model: this.store.User,
-            }
-        })
-
-        if (application == null) {
-            throw new Error.NotFoundError("Application could not be found.")
-        }
-
-        application.accepted = true
-        await application.save()
-    })}
-
-    /**
-     *
-     * Apply for an existing task
-     *
-     * Authorized Cases:
-     * - Any registered user
-     *
-     * @param {string} token - An authentication token for verifying authorization
-     * @param {string} id - The task to operate on
-     * @param {string} application - The application to submit
-     *
-     * @throws {SwollyAuthorizationError} Thrown when the caller, identified by the token, could either not be authenticated or is not authorized.
-     * @throws {SwollyNotFoundError} Thrown when the task could not be found
-     * @throws {SwollySequelizeError}
-     */
-    async apply(token, id, application) { return Repository._rethrow(async () => {
-        const caller = await this._getAuth(token)
-
-        const task = await this.store.Task.findByPk(id, {
-            include: {
-                model: this.store.User,
-                as: "supporters"
-            }
-        })
-
-        if (task == null) {
-            throw new Error.NotFoundError("Task could not be found.")
-        }
-
-        if (task.hasSupporter(caller)) {
-            throw new Error("User has already applied to this task.")
-        }
-
-        if (task.supporters.filter(supporter => supporter.TaskSupporters.accepted).length >= task.supporterGoal) {
-            throw new Error("This task is closed for applications")
-        }
-
-        await this.store.TaskSupporters.create({
-            TaskId: id,
-            SupporterId: caller.id,
-            application
-        })
     })}
 }
 

@@ -46,6 +46,8 @@ class Swolly {
             throw new Errors.SequelizeError(err.message)
         }
 
+        /** @type {ApplicationRepository} */
+        this.Application = new ApplicationRepository(this)
         /** @type {CategoryRepository} */
         this.Category = new CategoryRepository(this)
         /** @type {ImageRepository} */

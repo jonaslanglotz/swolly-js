@@ -231,14 +231,14 @@ async function createStore(connectionURI, options, alter) {
         through: "ProjectImages"
     })
 
-    const TaskSupporters = sequelize.define("TaskSupporters", {
+    const Application = sequelize.define("Application", {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV4,
             allowNull: false,
             primaryKey: true
         },
-        application: {
+        text: {
             type: DataTypes.TEXT,
             allowNull: false,
             defaultValue: ""
@@ -251,21 +251,55 @@ async function createStore(connectionURI, options, alter) {
 
     })
 
-    Task.Supporters = Task.belongsToMany(User, {
-        foreignKey: {
-            name: "SupporterId",
-            allowNull: false
-        },
-        as: "supporters",
-        through: TaskSupporters
-    })
-    User.SupportedTasks = User.belongsToMany(Task, {
+    Task.belongsToMany(User, {
         foreignKey: {
             name: "TaskId",
             allowNull: false
         },
-        as: "supportedTasks",
-        through: TaskSupporters
+        through: Application,
+        as: "supporters"
+    })
+    User.belongsToMany(Task, {
+        foreignKey: {
+            name: "UserId",
+            allowNull: false
+        },
+        through: Application,
+        as: "supportedTasks"
+    }
+
+    Task.Applications = Task.hasMany(Application, {
+        foreignKey: {
+            name: "TaskId",
+            allowNull: false
+        },
+        onDelete: "CASCADE",
+        as: "applications",
+    })
+
+    Application.Task = Application.belongsTo(Task, {
+        foreignKey: {
+            name: "TaskId",
+            allowNull: false
+        },
+        as: "task",
+    })
+
+    User.Applications = User.hasMany(Application, {
+        foreignKey: {
+            name: "UserId",
+            allowNull: false
+        },
+        onDelete: "CASCADE",
+        as: "applications",
+    })
+
+    Application.User = Application.belongsTo(User, {
+        foreignKey: {
+            name: "UserId",
+            allowNull: false
+        },
+        as: "user",
     })
 
     await sequelize.authenticate()

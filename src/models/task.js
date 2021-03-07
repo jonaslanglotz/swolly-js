@@ -179,17 +179,17 @@ class Task extends Model {
     }
 
     /***
-     * Returns the associated supporters
+     * Returns the associated applications
      *
-     * @param {object} [options] - See {@link UserRepository#getAll} for more information. "filter.supportingTaskId" will already be set.
+     * @param {object} [options] - See {@link ApplicationRepository#getAll} for more information. "filter.taskId" will already be set.
      *
      * @param {boolean} [filtered] - if the return values properties should be filtered to make sure the user is allowed to see them. Defaults to true if the instance is an authenticated instance, false if otherwise.
-     * @return {User[]}
+     * @return {Application[]}
      * */
-    async getSupporters(options = {}, filtered = this.isAuthenticated) {
+    async getApplications(options = {}, filtered = this.isAuthenticated) {
         options.filter = options.filter == null ? {} : options.filter
-        options.filter.supportingTaskId = this._id
-        return this._swolly.User.getAll(this._callerToken, options)
+        options.filter.taskId = this._id
+        return this._swolly.Application.getAll(this._callerToken, options)
     }
 }
 
