@@ -235,4 +235,4 @@ class ApplicationRepository extends Repository {
     })}
 }
 
-module.exports = TaskRepository
+module.exports = ApplicationRepository
