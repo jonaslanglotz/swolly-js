@@ -11,8 +11,8 @@ class ApplicationRepository extends Repository {
      * Get a listing of applications, optionally filtered and sorted
      *
      * Authorized Cases:
-     * - A project owner accessing applications for a single task
      * - A user accessing their own applications
+     * - A user accessing applications for a single task
      * - An admin accessing applications
      *
      * @param {string} token - An authentication token for verifying authorization
@@ -41,18 +41,9 @@ class ApplicationRepository extends Repository {
         if (
             !caller.isAdmin
             && (filter && filter.userId != caller.getId())
+            && (filter && filter.taskId != null)
         ) {
-            if (filter && filter.taskId != null) {
-                const task = this.store.Task.findByPk(filter.taskId, {include: {
-                    model: this.store.Project,
-                    as: "project"
-                }})
-                if (task == null || task.project.CreatorId != caller.getId()) {
-                    throw new Errors.AuthorizationError()
-                }
-            } else {
-                throw new Errors.AuthorizationError()
-            }
+            throw new Errors.AuthorizationError()
         }
 
         const result = await this.store.Application.findAll({
