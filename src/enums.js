@@ -1,6 +1,6 @@
 module.exports = {
-    ApplicationSortField: require("./enums/userSortField"),
-    ApplicationValidationErrorCode: require("./enums/projectValidationErrorCode"),
+    ApplicationSortField: require("./enums/applicationSortField"),
+    ApplicationValidationErrorCode: require("./enums/applicationValidationErrorCode"),
     CategorySortField: require("./enums/categorySortField"),
     CategoryValidationErrorCode: require("./enums/categoryValidationErrorCode"),
     ImageSortField: require("./enums/imageSortField"),
