@@ -100,7 +100,7 @@ class ApplicationRepository extends Repository {
     async create(token, values) { return Repository._rethrow(async () => {
         const caller = await this._getAuth(token)
 
-        values.accepted = true
+        values.accepted = false
 
         Application.validate(values)
 
