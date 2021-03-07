@@ -28,7 +28,7 @@ class Application extends Model {
         super._loadInstance()
 
         /** @type {string} */
-        this._text = this._readScalar("name", "string")
+        this._text = this._readScalar("text", "string")
 
         /** @type {boolean} */
         this._accepted = this._readScalar("accepted", "boolean")
