@@ -90,7 +90,7 @@ class TaskRepository extends Repository {
      * @param {string} task.title - Title of the task
      * @param {string} task.description - Description of the task
      * @param {number} task.supporterGoal - Supporter goal of the task
-     * @param {string} task.ProjectId - The project this task should be assigned to
+     * @param {string} task.projectId - The project this task should be assigned to
      *
      * @return {Task}
      *
