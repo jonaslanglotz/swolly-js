@@ -1,5 +1,6 @@
 const Repository = require("./repository")
 const Task = require("../models/task")
+const Errors = require("../errors")
 
 /**
  * Repository for all methods relating to tasks

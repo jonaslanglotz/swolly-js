@@ -1,6 +1,7 @@
 const Repository = require("./repository")
 const Application = require("../models/application")
 const ApplicationValidationErrorCode = require("../enums/applicationValidationErrorCode")
+const Errors = require("../errors")
 
 /**
  * Repository for all methods relating to applications
