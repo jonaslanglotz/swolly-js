@@ -99,7 +99,7 @@ class ImageRepository extends Repository{
         }
 
 
-        let fileType
+        let fileTypeStream
         try {
             const validMimeTypes = ["image/png", "image/jpeg"]
             fileTypeStream = await FileType.stream(imageStream)
