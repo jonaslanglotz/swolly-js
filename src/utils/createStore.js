@@ -116,6 +116,11 @@ async function createStore(connectionURI, options, alter) {
             allowNull: false,
             primaryKey: true
         }
+        extension: {
+            type: DataTypes.STRING,
+            defaultValue: "",
+            allowNull: false,
+        }
     })
 
     const Task = sequelize.define("Task", {

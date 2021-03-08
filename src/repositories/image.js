@@ -99,10 +99,10 @@ class ImageRepository extends Repository{
         }
 
 
-
+        let fileType
         try {
             const validMimeTypes = ["image/png", "image/jpeg"]
-            const fileType = await FileType.fromStream(imageStream)
+            fileType = await FileType.fromStream(imageStream)
             if (!validMimeTypes.includes(fileType.mime)) {
                 throw new Errors.UploadError("Image was neither a png nor a jpg.")
             }
@@ -112,7 +112,7 @@ class ImageRepository extends Repository{
             throw new Errors.UploadError(err.message)
         }
 
-        const image = await this.store.Image.create({ id })
+        const image = await this.store.Image.create({ id, extension: fileType.ext })
         return await Image.create(image, this.swolly, token)
     })}
 
