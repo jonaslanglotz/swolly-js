@@ -193,7 +193,7 @@ class ProjectRepository extends Repository {
             throw new Errors.AuthorizationError()
         }
 
-        if (!caller.isAdmin && values.CreatorId != null && values.CreatorId === caller.getId()) {
+        if (!caller.isAdmin && values.CreatorId != null && values.CreatorId != caller.getId()) {
             throw new Errors.AuthorizationError()
         }
 
