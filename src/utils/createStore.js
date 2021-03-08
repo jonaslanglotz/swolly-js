@@ -115,7 +115,7 @@ async function createStore(connectionURI, options, alter) {
             defaultValue: Sequelize.UUIDV4,
             allowNull: false,
             primaryKey: true
-        }
+        },
         extension: {
             type: DataTypes.STRING,
             defaultValue: "",
