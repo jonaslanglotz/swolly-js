@@ -94,7 +94,7 @@ class ImageRepository extends Repository{
         const caller = await this._getAuth(token)
         const id = uuid()
         
-        if (!(image instanceof fs.ReadStream)) {
+        if (!(imageStream instanceof fs.ReadStream)) {
             throw new Errors.UploadError("image was not a stream")
         }
 
