@@ -29,6 +29,20 @@ class Image extends Model {
     }
 
     /**
+     * Outputs a (optionally un-)filtered object-representation of the contained data.
+     *
+     * @param {boolean} [filtered] - if the return values properties should be filtered to make sure the user is allowed to see them. Defaults to true if the instance is an authenticated instance, false if otherwise.
+     * @return {object}
+     * 
+     * */
+    getData(filtered = this.isAuthenticated) {
+        return {
+            ...super.getData(filtered),
+            extension: this.getExtension(filtered),
+        }
+    }
+
+    /**
      * Assigns this image to a project
      *
      * @param {string} projectId
