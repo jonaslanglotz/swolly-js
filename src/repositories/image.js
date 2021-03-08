@@ -102,17 +102,17 @@ class ImageRepository extends Repository{
         let fileType
         try {
             const validMimeTypes = ["image/png", "image/jpeg"]
-            fileType = await FileType.fromStream(imageStream)
-            if (!validMimeTypes.includes(fileType.mime)) {
+            fileTypeStream = await FileType.stream(imageStream)
+            if (!validMimeTypes.includes(fileTypeStream.fileType.mime)) {
                 throw new Errors.UploadError("Image was neither a png nor a jpg.")
             }
-            const writeStream = fs.createWriteStream(path.join(this.swolly.dataFolder, `${id}.${fileType.ext}`))
-            imageStream.pipe(writeStream)
+            const writeStream = fs.createWriteStream(path.join(this.swolly.dataFolder, `${id}.${fileTypeStream.fileType.ext}`))
+            fileTypeStream.pipe(writeStream)
         } catch (err) {
             throw new Errors.UploadError(err.message)
         }
 
-        const image = await this.store.Image.create({ id, extension: fileType.ext })
+        const image = await this.store.Image.create({ id, extension: fileTypeStream.fileType.ext })
         return await Image.create(image, this.swolly, token)
     })}
 
