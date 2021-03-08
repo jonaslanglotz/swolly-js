@@ -15,6 +15,17 @@ class Image extends Model {
      * */
     constructor (instance, swolly, token) {
         super(instance, swolly, token)
+        this._loadInstance()
+    }
+
+    /**
+     * Loads all values relevant to this class from the provided instance.
+     * */
+    _loadInstance() {
+        super._loadInstance()
+
+        /** @type {string} */
+        this._extension = this._readScalar("extension", "string")
     }
 
     /**
@@ -41,6 +52,16 @@ class Image extends Model {
         }
 
         this._swolly.Image.unassign(this._callerToken, this._id, projectId)
+    }
+
+    /***
+     * Returns the value of 'extension'
+     *
+     * @param {boolean} [filtered] - if the return values properties should be filtered to make sure the user is allowed to see them. Defaults to true if the instance is an authenticated instance, false if otherwise.
+     * @return {string}
+     * */
+    getExtension(filtered = this.isAuthenticated) {
+        return this._extension
     }
 
     /***

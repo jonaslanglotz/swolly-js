@@ -106,7 +106,7 @@ class ImageRepository extends Repository{
             if (!validMimeTypes.includes(fileType.mime)) {
                 throw new Errors.UploadError("Image was neither a png nor a jpg.")
             }
-            const writeStream = fs.createWriteStream(path.join(this.swolly.dataFolder, id))
+            const writeStream = fs.createWriteStream(path.join(this.swolly.dataFolder, `${id}.${fileType.ext}`))
             imageStream.pipe(writeStream)
         } catch (err) {
             throw new Errors.UploadError(err.message)

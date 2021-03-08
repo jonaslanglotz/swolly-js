@@ -30,6 +30,7 @@ class Category extends Model {
 
         /** @type {string} */
         this._name = this._readScalar("name", "string")
+        /** @type {string} */
         this._ImageId = this._readScalar("ImageId", "string")
     }
 
