@@ -98,8 +98,10 @@ class ImageRepository extends Repository{
             throw new Errors.UploadError("image was not a stream")
         }
 
+
+
         try {
-            const validMimeTypes = ["image/png", "image/jpg"]
+            const validMimeTypes = ["image/png", "image/jpeg"]
             const fileType = await FileType.fromStream(imageStream)
             if (!validMimeTypes.includes(fileType.mime)) {
                 throw new Errors.UploadError("Image was neither a png nor a jpg.")
