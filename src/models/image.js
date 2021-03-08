@@ -48,7 +48,7 @@ class Image extends Model {
      * @param {string} projectId
      * */
     assign (projectId) {
-        if (!this.isAuthenticed) {
+        if (!this.isAuthenticated) {
             throw new Error()
         }
 
