@@ -51,7 +51,7 @@ class ImageRepository extends Repository{
                 as: "projects",
                 through: {
                     where: {
-                        ProjectId: filter.projectId
+                        id: filter.projectId
                     }
                 }
             }}),
