@@ -192,14 +192,7 @@ class User extends Model {
      * @return {string}
      * */
     getMail(filtered = this.isAuthenticated) {
-        if (
-            !filtered
-            || !this.isAuthenticated
-            || this._caller.isAdmin
-            || this._caller.getId() == this._id
-        ) {
-            return this._mail 
-        }
+        return this._mail 
     }
 
     /***

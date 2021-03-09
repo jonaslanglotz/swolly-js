@@ -42,9 +42,9 @@ class ApplicationRepository extends Repository {
 
         if (
             !caller.isAdmin
-            && (filter && filter.userId != caller.getId())
-            && (filter && filter.taskId == null)
-            && (filter && filter.projectId == null)
+            && (!filter || filter.userId != caller.getId())
+            && (!filter || filter.taskId == null)
+            && (!filter || filter.projectId == null)
         ) {
             throw new Errors.AuthorizationError()
         }
