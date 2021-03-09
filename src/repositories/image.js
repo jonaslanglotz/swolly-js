@@ -49,9 +49,10 @@ class ImageRepository extends Repository{
             ...(filter != null && filter.projectId != null && { include: {
                 model: this.store.Project,
                 as: "projects",
+                required: true,
                 through: {
                     where: {
-                        id: filter.projectId
+                        ProjectId: filter.projectId
                     }
                 }
             }}),
