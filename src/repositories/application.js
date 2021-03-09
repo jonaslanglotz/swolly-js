@@ -23,6 +23,7 @@ class ApplicationRepository extends Repository {
      * @param {object} [options.filter] Describes how to filter the results
      * @param {string} [options.filter.taskId] Filters result down to applications to a single task
      * @param {string} [options.filter.userId] Filters result down to applications of a single user
+     * @param {string} [options.filter.projectId] Filters result down to applications of a single project
      * @param {string} [options.filter.accepted] Filters result down to applications that have been accepted
      *
      * @param {object} [options.sort] Describes how to sort the results
@@ -43,6 +44,7 @@ class ApplicationRepository extends Repository {
             !caller.isAdmin
             && (filter && filter.userId != caller.getId())
             && (filter && filter.taskId == null)
+            && (filter && filter.projectId == null)
         ) {
             throw new Errors.AuthorizationError()
         }
@@ -52,6 +54,18 @@ class ApplicationRepository extends Repository {
                 ...(filter.taskId != null && {TaskId: filter.taskId}),
                 ...(filter.userId != null && {UserId: filter.userId}),
                 ...(filter.accepted != null && {accepted: filter.accepted}),
+            }}),
+            ...(filter != null && filter.projectId != null && { include: {
+                model: this.store.Task,
+                as: "task",
+                required: true,
+                include: {
+                    model: this.store.Project,
+                    as: "project",
+                    where: {
+                        id: filter.projectId
+                    }
+                }
             }}),
             ...(sort != null && {order: [[sort.field, sort.direction]]})
         })
