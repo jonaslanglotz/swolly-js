@@ -157,6 +157,9 @@ class Project extends Model {
         }
     }
 
+    get isPublic () {
+        return this._status === Enums.ProjectStatus.PUBLIC
+    }
 
     /**
      * Outputs a (optionally un-)filtered object-representation of the contained data.
