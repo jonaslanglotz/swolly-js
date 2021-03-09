@@ -35,9 +35,11 @@ class ImageRepository extends Repository{
     async getAll(token, options = {}) { return Repository._rethrow(async () => {
         const caller = await this._getAuth(token)
 
+        const { sort, filter } = options
+
         if(
             !caller.isAdmin &&
-            (options.filter == null || options.filter.projectId == null)
+            (filter == null || filter.projectId == null)
         ) { 
             throw new Errors.AuthorizationError()
         }
