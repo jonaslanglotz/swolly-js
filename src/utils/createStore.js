@@ -221,7 +221,7 @@ async function createStore(connectionURI, options, alter) {
 
     Project.Images = Project.belongsToMany(Image, {
         foreignKey: {
-            name: "ImageId",
+            name: "ProjectId",
             allowNull: false
         },
         as: "images",
@@ -229,7 +229,7 @@ async function createStore(connectionURI, options, alter) {
     })
     Image.Projects = Image.belongsToMany(Project, {
         foreignKey: {
-            name: "ProjectId",
+            name: "ImageId",
             allowNull: false
         },
         as: "projects",
